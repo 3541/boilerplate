@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+rm -rf build
+
+mkdir -p build/{debug,debug_clang,profile,release}
+
+cd build/debug && cmake -GNinja ../.. -DCMAKE_BUILD_TYPE=Debug
+cd ../profile && cmake -GNinja ../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPROFILE_BUILD=TRUE
+cd ../release && cmake -GNinja ../.. -DCMAKE_BUILD_TYPE=Release
+
+if command -v clang &> /dev/null; then
+    cd ../debug_clang && cmake -GNinja ../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=clang
+fi
