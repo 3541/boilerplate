@@ -30,3 +30,8 @@ function(target_add_warnings target warnings)
     target_add_warning(${target} "${warning}")
   endforeach()
 endfunction()
+
+function(target_add_extra_warnings target)
+  set(extra_warnings "bad-function-cast" "disabled-optimization" "duplicated-branches" "duplicated-cond" "float-equal" "format-nonliteral" "format-security" "implicit" "inline" "logical-op" "missing-declarations" "missing-include-dirs" "missing-prototypes" "nested-externs" "null-dereference" "packed" "shadow" "stack-protector" "strict-prototypes" "undef" "cast-align" "cast-qual" "conversion ctor-dtor-privacy" "delete-non-virtual-dtor" "effc++")
+  target_add_warnings(${target} "${extra_warnings}")
+endfunction()
