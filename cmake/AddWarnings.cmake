@@ -1,0 +1,32 @@
+function(target_add_warning target warning)
+  include(CheckCCompilerFlag)
+  include(CheckCXXCompilerFlag)
+
+  if (MSVC)
+    set(flag "/W${warning}")
+  else()
+    set(flag "-W${warning}")
+  endif()
+
+  get_property(languages GLOBAL PROPERTY ENABLED_LANGUAGES)
+
+  if ("C" IN_LIST languages)
+    check_c_compiler_flag("${flag}" "C_HAS_WARNING_${warning}")
+    if (C_HAS_WARNING_${warning})
+      target_compile_options(${target} PRIVATE $<$<COMPILE_LANGUAGE:C>:${flag}>)
+    endif()
+  endif()
+
+  if ("CXX" IN_LIST languages)
+    check_cxx_compiler_flag("${flag}" "CXX_HAS_WARNING_${warning}")
+    if (CXX_HAS_WARNING_${warning})
+      target_compile_options(${target} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${flag}>)
+    endif()
+  endif()
+endfunction()
+
+function(target_add_warnings target warnings)
+  foreach(warning ${warnings})
+    target_add_warning(${target} "${warning}")
+  endforeach()
+endfunction()
