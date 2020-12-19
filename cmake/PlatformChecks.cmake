@@ -27,3 +27,12 @@ function(target_platform_checks target)
     target_compile_definitions(${target} PUBLIC ${target}_HAVE__Thread_local)
   endif()
 endfunction()
+
+function(target_link_math target)
+  include(CheckLibraryExists)
+
+  check_library_exists(m floor "" NEED_LIBM)
+  if (NEED_LIBM)
+    target_link_libraries(${target} PRIVATE m)
+  endif()
+endfunction()
