@@ -5,8 +5,10 @@ function(target_add_iwyu target)
     return()
   endif()
 
+  set(IWYU_CMD "${IWYU};-Xiwyu;--no_fwd_decls")
+
   set_target_properties(${target} PROPERTIES
-    C_INCLUDE_WHAT_YOU_USE ${IWYU}
-    CXX_INCLUDE_WHAT_YOU_USE ${IWYU}
+    C_INCLUDE_WHAT_YOU_USE "${IWYU_CMD}"
+    CXX_INCLUDE_WHAT_YOU_USE "${IWYU_CMD}"
   )
 endfunction()
