@@ -1,12 +1,14 @@
 function(target_add_flag_c target flag link public)
   include(CheckCCompilerFlag)
 
+  string(REPLACE "=" "_" flag_name ${flag})
+
   if (${link})
     set(CMAKE_REQUIRED_LINK_OPTIONS "-${flag}")
   endif()
 
-  check_c_compiler_flag("-${flag}" "C_HAS_FLAG_${flag}")
-  if (C_HAS_FLAG_${flag})
+  check_c_compiler_flag("-${flag}" "C_HAS_FLAG_${flag_name}")
+  if (C_HAS_FLAG_${flag_name})
     if (${public})
       target_compile_options(${target} PUBLIC $<$<COMPILE_LANGUAGE:C>:-${flag}>)
       if (${link})
@@ -26,12 +28,14 @@ endfunction()
 function(target_add_flag_cxx target flag link public)
   include(CheckCXXCompilerFlag)
 
+  string(REPLACE "=" "_" flag_name ${flag})
+
   if (${link})
     set(CMAKE_REQUIRED_LINK_OPTIONS "-${flag}")
   endif()
 
-  check_cxx_compiler_flag("-${flag}" "CXX_HAS_FLAG_${flag}")
-  if (CXX_HAS_FLAG_${flag})
+  check_cxx_compiler_flag("-${flag}" "CXX_HAS_FLAG_${flag_name}")
+  if (CXX_HAS_FLAG_${flag_name})
     if (${public})
       target_compile_options(${target} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:-${flag}>)
       if (${link})
