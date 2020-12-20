@@ -1,0 +1,7 @@
+option(SANITIZE "Enable sanitizers.")
+function(target_add_sanitizers target)
+  include(AddFlags)
+  if (SANITIZE)
+    target_add_flags(${target} "fsanitize=address;fsanitize=undefined" TRUE FALSE)
+  endif()
+endfunction()
