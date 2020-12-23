@@ -45,6 +45,10 @@ function(target_add_extra_warnings target)
     endif()
     set(extra_warnings_c "bad-function-cast" "implicit" "missing-prototpyes" "nested-externs" "strict-prototypes")
     set(extra_warnings_cxx "ctor-dtor-privacy" "delete-non-virtual-dtor" "effc++")
+    if (CMAKE_CXX_COMPILER_ID STREQUAL Intel)
+      # ICC is too aggressive with -Weffc++.
+      list(APPEND extra_warnings_cxx "no-effc++")
+    endif()
   endif()
 
   target_add_warnings(${target} "${extra_warnings_common}" FALSE)
