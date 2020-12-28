@@ -1,0 +1,12 @@
+function(target_disable_exceptions target)
+  include(AddFlags)
+
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_add_flag_cxx(${target} /EHs-c-)
+    target_compile_definitions(${target} _HAS_EXCEPTIONS=0)
+  elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+    target_add_flag_cxx(${target} -fno-exceptions)
+  else()
+    message(WARNING "Unknown compiler: Cannot disable exceptions.")
+  endif()
+endfunction()
