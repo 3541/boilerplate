@@ -1,4 +1,5 @@
 function(check_type type)
+  include(CheckFunctionExists)
   include(CheckTypeSize)
 
   if (HAVE_${type})
