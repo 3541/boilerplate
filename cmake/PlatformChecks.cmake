@@ -26,6 +26,10 @@ function(target_platform_checks target)
   if (HAVE__Thread_local)
     target_compile_definitions(${target} PUBLIC ${target}_HAVE__Thread_local)
   endif()
+
+  # For ZERO_STRUCT macro.
+  check_function_exists(memset_s ${target}_HAVE_memset_s)
+  check_function_exists(explicit_bzero ${target}_HAVE_explicit_bzero)
 endfunction()
 
 function(target_link_math target)
