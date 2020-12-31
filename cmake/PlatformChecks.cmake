@@ -17,6 +17,11 @@ endfunction()
 
 function(target_platform_checks target)
   include(CheckCSourceCompiles)
+  include(CheckSymbolExists)
+
+  if (WIN32)
+    target_compile_definitions(${target} PRIVATE WIN32_LEAN_AND_MEAN)
+  endif()
 
   check_type(ssize_t)
   target_have_item(${target} ssize_t)
@@ -39,6 +44,9 @@ function(target_platform_checks target)
 
   check_function_exists(explicit_bzero HAVE_explicit_bzero)
   target_have_item(${target} explicit_bzero)
+
+  check_symbol_exists(SecureZeroMemory "Windows.h" HAVE_SecureZeroMemory)
+  target_have_item(${target} SecureZeroMemory)
 endfunction()
 
 function(target_link_math target)
