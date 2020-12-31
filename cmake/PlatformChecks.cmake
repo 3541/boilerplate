@@ -33,6 +33,10 @@ function(target_platform_checks target)
   # For ZERO_STRUCT macro.
   check_function_exists(memset_s HAVE_memset_s)
   target_have_item(${target} memset_s)
+  if (HAVE_memset_s)
+    target_compile_definitions(${target} PUBLIC __STDC_WANT_LIB_EXT1__=1)
+  endif()
+
   check_function_exists(explicit_bzero HAVE_explicit_bzero)
   target_have_item(${target} explicit_bzero)
 endfunction()
