@@ -9,13 +9,17 @@ function(check_type type)
   check_type_size(${type} ${type})
 endfunction()
 
+function(target_have_item target item)
+  if (HAVE_${item})
+    target_compile_definitions(${target} PUBLIC ${target}_HAVE_${item})
+  endif()
+endfunction()
+
 function(target_platform_checks target)
   include(CheckCSourceCompiles)
 
   check_type(ssize_t)
-  if (HAVE_ssize_t)
-    target_compile_definitions(${target} PUBLIC ${target}_HAVE_ssize_t)
-  endif()
+  target_have_item(${target} ssize_t)
 
   check_c_source_compiles("
     _Thread_local int x = 123;
@@ -24,13 +28,13 @@ function(target_platform_checks target)
     }"
     HAVE__Thread_local
   )
-  if (HAVE__Thread_local)
-    target_compile_definitions(${target} PUBLIC ${target}_HAVE__Thread_local)
-  endif()
+  target_have_item(${target} _Thread_local)
 
   # For ZERO_STRUCT macro.
-  check_function_exists(memset_s ${target}_HAVE_memset_s)
-  check_function_exists(explicit_bzero ${target}_HAVE_explicit_bzero)
+  check_function_exists(memset_s HAVE_memset_s)
+  target_have_item(${target} memset_s)
+  check_function_exists(explicit_bzero HAVE_explicit_bzero)
+  target_have_item(${target} explicit_bzero)
 endfunction()
 
 function(target_link_math target)
