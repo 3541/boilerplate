@@ -30,6 +30,17 @@ function(target_add_warnings target warnings public)
   endforeach()
 endfunction()
 
+function(target_set_werror target)
+  if (MSVC)
+    # On MSVC, the linker can also take this argument.
+    target_add_flag(${target} "WX" TRUE FALSE)
+  else()
+    target_add_flag(${target} "Werror" FALSE FALSE)
+  endif()
+endfunction()
+
+option(USE_WERROR "Set Werror.")
+
 function(target_add_extra_warnings target pedantic)
   if (MSVC)
     set(extra_warnings_common "4")
@@ -59,6 +70,10 @@ function(target_add_extra_warnings target pedantic)
   endif()
 
   target_add_warnings(${target} "${extra_warnings_common}" FALSE)
+
+  if (USE_WERROR)
+    target_set_werror(${target})
+  endif()
 
   get_property(languages GLOBAL PROPERTY ENABLED_LANGUAGES)
   if ("C" IN_LIST languages)
