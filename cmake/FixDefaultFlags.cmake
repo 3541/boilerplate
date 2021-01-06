@@ -1,0 +1,6 @@
+macro(fix_default_flags)
+  if (MSVC)
+    string(REGEX REPLACE "/EH[a-z]+" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+    string(REPLACE "/GR" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+  endif()
+endmacro()
