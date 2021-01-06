@@ -48,6 +48,8 @@ function(target_add_extra_warnings target pedantic)
     set(extra_warnings_cxx "")
 
     target_compile_definitions(${target} PRIVATE _CRT_SECURE_NO_WARNINGS)
+    # /W4 produces copious C5105 warnings in standard library headers.
+    target_add_flag(${target} "wd5105" FALSE TRUE)
   else()
     set(extra_warnings_common "all" "extra" "disabled-optimization" "duplicated-branches" "duplicated-cond" "float-equal" "format-nonliteral" "format-security" "logical-op" "missing-declarations" "missing-include-dirs" "null-dereference" "packed" "shadow" "stack-protector" "undef" "cast-align" "cast-qual" "conversion")
     if (${pedantic})
