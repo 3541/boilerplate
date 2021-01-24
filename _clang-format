@@ -10,3 +10,4 @@ AlwaysBreakTemplateDeclarations: true
 AccessModifierOffset: -4
 BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ColumnLimit: 100
