@@ -35,6 +35,17 @@ function(target_platform_checks target)
   )
   target_have_item(${target} _Thread_local)
 
+  check_c_source_compiles("
+    #define GEN_MACRO(X) _Generic((X), int: \"int\", float: \"float\")
+    int main(void) {
+      int x;
+      const char* res = GEN_MACRO(x);
+      return 0;
+    }"
+    HAVE__Generic
+  )
+  target_have_item(${target} _Generic)
+
   # For ZERO_STRUCT macro.
   check_function_exists(memset_s HAVE_memset_s)
   target_have_item(${target} memset_s)
