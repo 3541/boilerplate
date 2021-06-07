@@ -3,12 +3,12 @@ set -e
 
 rm -rf build
 
-meson build/debug --buildtype=debug $@
+meson build/debug --buildtype=debug -Db_coverage=true $@
 if command -v clang &> /dev/null; then
-   CC=clang meson build/debug_clang --buildtype=debug $@
-   CC=clang meson build/release_clang --buildtype=release -Db_lto=true -Db_pie=true $@
+   CC=clang meson build/debug_clang --buildtype=debug -Db_coverage=true $@
+   CC=clang meson build/release_clang --buildtype=release -Db_lto=true $@
 fi
-meson build/san --buildtype=debug -Db_sanitize=address,undefined $@
-meson build/debugopt --buildtype=debugoptimized -Db_lto=true -Db_pie=true $@
+meson build/san --buildtype=debug -Db_sanitize=address,undefined -Db_coverage=true $@
+meson build/debugopt --buildtype=debugoptimized -Db_lto=true $@
 meson build/profile --buildtype=debugoptimized -Dprofile=true $@
-meson build/release --buildtype=release -Db_lto=true -Db_pie=true $@
+meson build/release --buildtype=release -Db_lto=true $@
