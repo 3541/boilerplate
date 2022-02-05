@@ -11,3 +11,13 @@ AccessModifierOffset: -4
 BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ColumnLimit: 100
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<[[:alnum:]_]+>$'
+    SortPriority: 1
+  - Regex: '^<a3/[[:alnum:]_.]+>$'
+    SortPriority: 3
+  - Regex: '^<[[:alnum:]./]+>$'
+    SortPriority: 2
+  - Regex: '^".*"$'
+    SortPriority: 4
