@@ -17,7 +17,9 @@ IncludeCategories:
     SortPriority: 1
   - Regex: '^<a3/[[:alnum:]_.]+>$'
     SortPriority: 3
+  - Regex: '^<sc/[[:alnum:]_.]+>$'
+    SortPriority: 4
   - Regex: '^<[[:alnum:]./]+>$'
     SortPriority: 2
   - Regex: '^".*"$'
-    SortPriority: 4
+    SortPriority: 5
