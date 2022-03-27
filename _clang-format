@@ -14,12 +14,12 @@ ColumnLimit: 100
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^<[[:alnum:]_]+>$'
-    SortPriority: 1
+    Priority: 1
   - Regex: '^<a3/[[:alnum:]_.]+>$'
-    SortPriority: 3
+    Priority: 3
   - Regex: '^<sc/[[:alnum:]_.]+>$'
-    SortPriority: 4
+    Priority: 4
   - Regex: '^<[[:alnum:]./]+>$'
-    SortPriority: 2
+    Priority: 2
   - Regex: '^".*"$'
-    SortPriority: 5
+    Priority: 5
