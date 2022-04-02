@@ -8,7 +8,7 @@ if command -v clang &> /dev/null; then
    CC=clang CXX=clang++ meson build/debug_clang --buildtype=debug -Db_coverage=true $@
    CC=clang CXX=clang++ meson build/release_clang --buildtype=release -Db_lto=true $@
 fi
-meson build/san --buildtype=debug -Db_sanitize=address,undefined -Db_coverage=true $@
+meson build/san --buildtype=debug -Db_sanitize=address,undefined $@
 meson build/debugopt --buildtype=debugoptimized -Db_lto=true $@
 meson build/profile --buildtype=debugoptimized -Db_ndebug=true -Dprofile=true $@
 meson build/release --buildtype=release -Db_lto=true $@
