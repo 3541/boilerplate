@@ -3,6 +3,11 @@ set -e
 
 rm -rf build
 
+if command -v nix > /dev/null; then
+    # Nix sets AR=ar, which breaks LTO.
+    AR=
+fi
+
 meson build/debug --buildtype=debug -Db_coverage=true $@
 if command -v clang &> /dev/null; then
    CC=clang CXX=clang++ meson build/debug_clang --buildtype=debug -Db_coverage=true $@
