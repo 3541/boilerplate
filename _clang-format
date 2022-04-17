@@ -21,5 +21,7 @@ IncludeCategories:
     Priority: 4
   - Regex: '^<[[:alnum:]./]+>$'
     Priority: 2
+  - Regex: '"shim/[[:alnum:]./]+"$'
+    Priority: 2
   - Regex: '^".*"$'
     Priority: 5
