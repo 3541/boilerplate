@@ -11,6 +11,7 @@ AccessModifierOffset: -4
 BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ColumnLimit: 100
+AllowShortBlocksOnASingleLine: true
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^<[[:alnum:]_]+>$'
