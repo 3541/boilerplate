@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+BASE=$(dirname $(readlink -f "$0"))
+
 rm -rf build
 
 if command -v nix > /dev/null; then
@@ -10,8 +12,8 @@ fi
 
 meson build/debug --buildtype=debug -Db_coverage=true $@
 if command -v clang &> /dev/null; then
-   CC=clang CXX=clang++ meson build/debug_clang --buildtype=debug -Db_coverage=true $@
-   CC=clang CXX=clang++ meson build/release_clang --buildtype=release -Db_lto=true $@
+   meson build/debug_clang --native-file="$BASE/meson/clang.ini" --buildtype=debug -Db_coverage=true $@
+   meson build/release_clang --native-file="$BASE/meson/clang.ini" --buildtype=release -Db_lto=true $@
 fi
 meson build/san --buildtype=debug -Db_sanitize=address,undefined $@
 meson build/debugopt --buildtype=debugoptimized -Db_lto=true $@
