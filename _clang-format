@@ -13,6 +13,8 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ColumnLimit: 100
 AllowShortBlocksOnASingleLine: true
 IncludeBlocks: Regroup
+MacroBlockBegin: "^A3_M_BEGIN$"
+MacroBlockEnd: "^A3_M_END$"
 IncludeCategories:
   - Regex: '^<[[:alnum:]_]+>$'
     Priority: 1
