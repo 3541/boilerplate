@@ -5,11 +5,6 @@ BASE=$(dirname $(readlink -f "$0"))
 
 rm -rf build
 
-if command -v nix > /dev/null; then
-    # Nix sets AR=ar, which breaks LTO.
-    AR=
-fi
-
 meson build/debug --buildtype=debug -Db_coverage=true $@
 if command -v clang &> /dev/null; then
    meson build/debug_clang --native-file="$BASE/meson/clang.ini" --buildtype=debug -Db_coverage=true $@
