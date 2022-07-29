@@ -15,6 +15,7 @@ AllowShortBlocksOnASingleLine: true
 IncludeBlocks: Regroup
 MacroBlockBegin: "^A3_M_BEGIN$"
 MacroBlockEnd: "^A3_M_END$"
+ForEachMacros: ['A3_VEC_FOR_EACH', 'A3_LL_FOR_EACH', 'A3_LL_FOR_EACH_REV', 'A3_SLL_FOR_EACH', 'A3_HT_FOR_EACH']
 IncludeCategories:
   - Regex: '^<[[:alnum:]_]+>$'
     Priority: 1
