@@ -7,13 +7,8 @@ function(target_add_clang_tidy target)
     return()
   endif()
 
-  # The "secure" C11 API which this lint requires is neither particularly more
-  # secure than the alternative, nor supported on any major C library other
-  # than Microsoft's (and even theirs is out of date).
-  set(CLANG_TIDY_CMD "${CLANG_TIDY};-checks=-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling;-extra-arg=-Wno-unknown-warning-option;-extra-arg=-Qunused-arguments")
-
   set_target_properties(${target} PROPERTIES
-    C_CLANG_TIDY "${CLANG_TIDY_CMD}"
-    CXX_CLANG_TIDY "${CLANG_TIDY_CMD}"
+    C_CLANG_TIDY "${CLANG_TIDY}"
+    CXX_CLANG_TIDY "${CLANG_TIDY}"
   )
 endfunction()
