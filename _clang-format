@@ -20,14 +20,14 @@ IncludeCategories:
   - Regex: '^<[[:alnum:]_]+>$'
     Priority: 1
   - Regex: '^<a3/[[:alnum:]_.]+>$'
-    Priority: 3
-  - Regex: '^<sc/[[:alnum:]_.]+>$'
     Priority: 4
+  - Regex: '^<sc/[[:alnum:]_.]+>$'
+    Priority: 5
+  - Regex: '^<a3/shim/[[:alnum:]_.]+>$'
+    Priority: 3
+  - Regex: '"shim/[[:alnum:]./_]+"$'
+    Priority: 3
   - Regex: '^<[[:alnum:]./]+>$'
     Priority: 2
-  - Regex: '^<a3/shim/[[:alnum:]_.]+>$'
-    Priority: 2
-  - Regex: '"shim/[[:alnum:]./_]+"$'
-    Priority: 2
   - Regex: '^".*"$'
-    Priority: 5
+    Priority: 6
