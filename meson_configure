@@ -5,12 +5,18 @@ BASE=$(dirname $(readlink -f "$0"))
 
 rm -rf build
 
-meson build/debug --buildtype=debug -Db_coverage=true $@
-if command -v clang &> /dev/null; then
-   meson build/debug_clang --native-file="$BASE/meson/clang.ini" --buildtype=debug -Db_coverage=true $@
-   meson build/release_clang --native-file="$BASE/meson/clang.ini" --buildtype=release -Db_lto=true $@
-fi
-meson build/san --buildtype=debug -Db_sanitize=address,undefined $@
-meson build/debugopt --buildtype=debugoptimized -Db_lto=true $@
-meson build/profile --buildtype=debugoptimized -Db_ndebug=true -Dprofile=true $@
-meson build/release --buildtype=release -Db_lto=true $@
+for CC in gcc clang cl; do
+    if ! command -v $CC > /dev/null 2>&1; then
+       continue
+    fi
+
+    case $CC in
+        gcc) CXX=g++ ;;
+        clang) CXX=clang++ ;;
+        cl) CXX=cl ;;
+    esac
+
+    meson setup build/$CC/debug --buildtype=debug -Db_coverage=true -Db_sanitize=address,undefined $@
+    meson setup build/$CC/release --buildtype=release -Db_lto=true $@
+    meson setup build/$CC/profile --buildtype=debugoptimized -Db_ndebug=true -Db_lto=true -Dprofile=true
+done
