@@ -19,11 +19,11 @@ ForEachMacros: ['A3_VEC_FOR_EACH', 'A3_LL_FOR_EACH', 'A3_LL_FOR_EACH_REV', 'A3_S
 IncludeCategories:
   - Regex: '^<[[:alnum:]_]+>$'
     Priority: 1
-  - Regex: '^<a3/[[:alnum:]_.]+>$'
+  - Regex: '^<a3/[[:alnum:]_./]+>$'
     Priority: 4
-  - Regex: '^<sc/[[:alnum:]_.]+>$'
+  - Regex: '^<sc/[[:alnum:]_./]+>$'
     Priority: 5
-  - Regex: '^<a3/shim/[[:alnum:]_.]+>$'
+  - Regex: '^<a3/shim/[[:alnum:]_./]+>$'
     Priority: 3
   - Regex: '"shim/[[:alnum:]./_]+"$'
     Priority: 3
